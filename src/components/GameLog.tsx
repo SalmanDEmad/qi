@@ -16,25 +16,24 @@ export function GameLog() {
   }, [gameLog]);
 
   return (
-    <div className="bg-gray-900 text-gray-200 p-4 rounded-lg w-64">
-      <h3 className="font-bold text-lg mb-2 text-white">Game Log</h3>
+    <div className="bg-stone-900/90 border border-amber-900/30 text-stone-200 p-4 rounded-lg w-64">
+      <h3 className="font-bold text-lg mb-2 text-amber-100">Game Log</h3>
       <div
         ref={logRef}
-        className="h-64 overflow-y-auto space-y-1 text-sm font-mono"
-      >
+        className="h-64 overflow-y-auto space-y-1 text-sm font-mono">
         {gameLog.map((entry, i) => (
           <div
             key={i}
             className={`${
               entry.startsWith('AI:')
-                ? 'text-red-300'
+                ? 'text-red-400'
                 : entry.includes('captures')
-                ? 'text-yellow-300'
+                ? 'text-amber-300'
                 : entry.includes('fires')
-                ? 'text-orange-300'
+                ? 'text-orange-400'
                 : entry.includes('converts')
-                ? 'text-purple-300'
-                : 'text-gray-400'
+                ? 'text-purple-400'
+                : 'text-stone-400'
             }`}
           >
             {entry}

@@ -63,6 +63,11 @@ export function isCrossbowman(piece: Piece): boolean {
   return piece.type === 'X';
 }
 
+// Vanguard (K), Commanders (N, L, R), and Crossbowmen (X) are immune to ranged attacks
+export function isRangedImmune(piece: Piece): boolean {
+  return ['K', 'N', 'L', 'R', 'X'].includes(piece.type);
+}
+
 export function getSymbol(piece: Piece): string {
   return piece.owner === Owner.RED
     ? piece.type.toUpperCase()
@@ -341,7 +346,8 @@ export function canCrossbowFire(
     if (!isValidPosition(tr, piece.col)) break;
     const target = getPiece(board, tr, piece.col);
     if (target) {
-      if (target.owner !== piece.owner && !isSiege(target)) {
+      // Can't hit: friendly, siege engines, or ranged-immune units (K, N, L, R, X)
+      if (target.owner !== piece.owner && !isSiege(target) && !isRangedImmune(target)) {
         return { row: tr, col: piece.col };
       }
       break; // Blocked by any piece
@@ -372,7 +378,8 @@ export function canArcherFire(
     if (!isValidPosition(tr, piece.col)) break;
     const target = getPiece(board, tr, piece.col);
     if (target) {
-      if (target.owner !== piece.owner && !isSiege(target)) {
+      // Can't hit: friendly, siege engines, or ranged-immune units (K, N, L, R, X)
+      if (target.owner !== piece.owner && !isSiege(target) && !isRangedImmune(target)) {
         return { row: tr, col: piece.col };
       }
       break; // Blocked by any piece
@@ -398,7 +405,8 @@ export function getVolleyTargets(
       const tc = piece.col + dc;
       if (!isValidPosition(tr, tc)) continue;
       const target = getPiece(board, tr, tc);
-      if (target && target.owner !== piece.owner && !isSiege(target)) {
+      // Can't hit: friendly, siege engines, or ranged-immune units (K, N, L, R, X)
+      if (target && target.owner !== piece.owner && !isSiege(target) && !isRangedImmune(target)) {
         targets.push({ row: tr, col: tc });
       }
     }

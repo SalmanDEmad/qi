@@ -7,9 +7,19 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Build output
 dist
 dist-ssr
+build
 *.local
 
 # Editor directories and files
@@ -22,3 +32,19 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS files
+Thumbs.db
+
+# Cache
+.cache
+*.tsbuildinfo
+
+# Suggestions data
+suggestions.json
+suggestions.txt

@@ -65,23 +65,23 @@ export function GameControls() {
   const isMyTurn = currentPlayer === humanPlayer && !isAITurn;
 
   return (
-    <div className="bg-gray-800 text-white p-4 rounded-lg space-y-4 w-64">
+    <div className="bg-stone-900/90 border border-amber-900/30 text-white p-4 rounded-lg space-y-4 w-64">
       {/* Status */}
       <div className="text-center">
         {winner ? (
-          <div className={`text-2xl font-bold ${winner === humanPlayer ? 'text-green-400' : 'text-red-400'}`}>
+          <div className={`text-2xl font-bold ${winner === humanPlayer ? 'text-amber-400' : 'text-red-400'}`}>
             {winner === humanPlayer ? '🎉 You Win!' : '💀 You Lose'}
           </div>
         ) : (
-          <div className={`text-lg font-semibold ${isMyTurn ? 'text-green-400' : 'text-yellow-400'}`}>
+          <div className={`text-lg font-semibold ${isMyTurn ? 'text-amber-400' : 'text-red-400'}`}>
             {isAITurn ? 'AI is thinking...' : `${currentPlayer}'s turn`}
           </div>
         )}
       </div>
 
       {/* Piece Counter */}
-      <div className="bg-gray-700 p-2 rounded">
-        <div className="text-xs text-gray-400 text-center mb-1">Pieces Remaining</div>
+      <div className="bg-stone-800 p-2 rounded border border-stone-700">
+        <div className="text-xs text-stone-400 text-center mb-1">Pieces Remaining</div>
         <div className="flex justify-around text-sm">
           <div className="text-center">
             <div className="text-red-400 font-bold text-lg">{pieceCount.red}</div>
@@ -97,23 +97,23 @@ export function GameControls() {
 
       {/* Quick help for ranged units */}
       {isMyTurn && !winner && !selectedPiece && (
-        <div className="bg-gray-700/50 p-2 rounded text-xs text-gray-400">
-          <div className="font-semibold text-gray-300 mb-1">💡 Ranged Units:</div>
+        <div className="bg-stone-800/50 p-2 rounded border border-stone-700 text-xs text-stone-400">
+          <div className="font-semibold text-amber-200 mb-1">💡 Ranged Units:</div>
           <div>• <span className="text-orange-400">X</span> Crossbow: Click to select, then "Crossbow Fire" to shoot forward</div>
           <div>• <span className="text-orange-400">B</span> Archer: Click to select, then "Archer Fire" or "Volley" for area attack</div>
-          <div className="mt-1 text-yellow-500">Select a ranged unit to see attack options!</div>
+          <div className="mt-1 text-amber-400">Select a ranged unit to see attack options!</div>
         </div>
       )}
 
       {/* Selected piece info */}
       {selectedPiece && (
-        <div className="bg-gray-700 p-3 rounded">
-          <div className="font-semibold">Selected: {PIECE_NAMES[selectedPiece.type]}</div>
-          <div className="text-sm text-gray-300">
+        <div className="bg-stone-800 p-3 rounded border border-stone-700">
+          <div className="font-semibold text-amber-100">Selected: {PIECE_NAMES[selectedPiece.type]}</div>
+          <div className="text-sm text-stone-300">
             Position: ({selectedPiece.row + 1}, {selectedPiece.col + 1})
           </div>
           {selectedPiece.isReloading && (
-            <div className="text-sm text-yellow-400">Reloading...</div>
+            <div className="text-sm text-amber-400">Reloading...</div>
           )}
         </div>
       )}
